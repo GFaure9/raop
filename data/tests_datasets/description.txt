@@ -1,0 +1,6 @@
+# Main datasets for unit tests
+
+The .csv files were found on:
+https://www.ivolatility.com/data/futures.html
+
+# todo: add description
