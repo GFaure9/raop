@@ -1,2 +1,2 @@
-from option import Option
-from payoffs import *
+from .option import Option
+from .payoffs import *
