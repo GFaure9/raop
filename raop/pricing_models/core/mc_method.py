@@ -1,9 +1,9 @@
 import numpy as np
 import scipy.special as spe
 
-from raop.stochastic_processes.stochastic_process import StochasticProcess
+from raop.stochastic_processes import StochasticProcess
 from raop.options import payoffs
-from raop.utils.log import logger
+from raop.utils import logger
 
 available_functions = [
     "laguerre",

@@ -5,7 +5,7 @@ import pandas as pd
 from typing import Type, Union, Tuple, List
 from itertools import product
 from raop.pricing_models.pricing_model import OptionPricingModel
-from raop.utils.log import logger
+from raop.utils import logger
 
 from raop.options import payoffs
 

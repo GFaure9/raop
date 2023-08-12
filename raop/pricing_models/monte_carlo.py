@@ -1,8 +1,8 @@
 import numpy as np
 
 from raop.pricing_models.pricing_model import OptionPricingModel
-from raop.stochastic_processes.stochastic_process import StochasticProcess
-from raop.utils.log import logger
+from raop.stochastic_processes import StochasticProcess
+from raop.utils import logger
 from raop.options import payoffs
 from raop.pricing_models.core.mc_method import monte_carlo
 

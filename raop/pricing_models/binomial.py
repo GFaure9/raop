@@ -1,7 +1,7 @@
 import numpy as np
 
 from raop.pricing_models.pricing_model import OptionPricingModel
-from raop.utils.log import logger
+from raop.utils import logger
 from raop.pricing_models.core.binary_tree import create_binary_tree,\
     compute_last_option_prices,\
     compute_previous_option_prices

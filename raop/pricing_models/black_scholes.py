@@ -1,7 +1,7 @@
 import numpy as np
 
 from raop.pricing_models.pricing_model import OptionPricingModel
-from raop.utils.log import logger
+from raop.utils import logger
 
 from scipy.stats import norm
 

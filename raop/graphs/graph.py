@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
 
-from raop.utils.log import logger
+from raop.utils import logger
 
 
 class Graph:

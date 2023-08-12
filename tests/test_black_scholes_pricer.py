@@ -4,12 +4,10 @@ import logging
 import pandas as pd
 import numpy as np
 
-from raop.options.option import Option
-from raop.pricing_models.black_scholes import BlackScholes
+from raop.options import Option
+from raop.pricing_models import BlackScholes
 
-from raop.utils.find_root_path import find_project_root
-from raop.utils.date_time import days_between_dates
-from raop.utils.log import logger
+from raop.utils import find_project_root, days_between_dates, logger
 
 logger.setLevel(logging.ERROR)
 

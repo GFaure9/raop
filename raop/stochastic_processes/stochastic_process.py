@@ -3,7 +3,7 @@ import numpy as np
 from typing import Union, Tuple
 from collections import namedtuple
 from raop.stochastic_processes import process_update
-from raop.utils.log import logger
+from raop.utils import logger
 
 
 process_update_models = {
