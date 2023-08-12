@@ -1,3 +1,3 @@
-# RAOP
+# raop
 
-__R__(isk)-__A__(ware ) __O__(ption) __P__(ricing) Library
+__r__(isk)-__a__(ware ) __o__(ption) __p__(ricing) Library
