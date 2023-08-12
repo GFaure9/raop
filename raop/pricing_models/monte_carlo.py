@@ -4,7 +4,7 @@ from raop.pricing_models.pricing_model import OptionPricingModel
 from raop.stochastic_processes import StochasticProcess
 from raop.utils import logger
 from raop.options import payoffs
-from raop.pricing_models.core.mc_method import monte_carlo
+from raop.pricing_models.core import monte_carlo
 
 
 class MonteCarlo(OptionPricingModel):
