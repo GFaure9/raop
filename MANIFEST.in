@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include requirements.txt
+recursive-include docs *
+recursive-include data *
+recursive-include tests *
+recursive-include outputs *

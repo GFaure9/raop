@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: raop
+Version: 0.0.1
+Summary: Warning: this package is in alpha stage of development. Use at your own risk.
+Author: Guilhem Fauré
+Author-email: <guilhemfaure@outlook.fr>
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: OS Independent
+License-File: LICENSE.txt
