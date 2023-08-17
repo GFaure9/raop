@@ -7,7 +7,7 @@ from itertools import product
 from raop.pricing_models.pricing_model import OptionPricingModel
 from raop.utils import logger
 
-from raop.options import payoffs
+# from raop.options import payoffs
 
 
 def check_option_pricing_kwargs(model: Type[OptionPricingModel]):
@@ -23,10 +23,26 @@ def check_option_pricing_kwargs(model: Type[OptionPricingModel]):
 
 class Option:
     """
-    Main class to model an option among the following types:
+    Main class to model a stock option among the following types:
     - european
     - american
     ...
+
+    Attributes:
+        name (str): name of the option (its category): "european", "american", ...
+        option_type (str): type of the option. Either "put" or "call".
+        underlying_price (float): price of the underlying asset at t=0 (when option is priced).
+        strike_price (float): strike price of the option.
+        risk_free_rate (float): risk-free rate of the option.
+        time_to_maturity (float): time when the option expires (expressed in years).
+        volatility (float): volatility of the underlying asset price at t=0.
+
+    Methods:
+        # todo: should "payoffs" be kept ?
+        compute_price(): ???
+        compute_greeks(): ???
+        sensitivity(): ???
+        to_dict(): ???
     """
     args_to_attr = {
         "name": "name",
@@ -82,14 +98,14 @@ class Option:
         # #############################################
         return vars(self)
 
-    def payoff(self, **kwargs) -> float:
-        log.info(f"Started computing {self.name} option's pay-off...")
-
-        payoffs_func = getattr(payoffs, self.name)
-        pay_off = payoffs_func(**self.to_dict(), **kwargs)
-
-        log.info(f"Finished computing option's pay-off![Pay-Off = {pay_off}]\n")
-        return pay_off
+    # def payoff(self, **kwargs) -> float:
+    #     log.info(f"Started computing {self.name} option's pay-off...")
+    #
+    #     payoffs_func = getattr(payoffs, self.name)
+    #     pay_off = payoffs_func(**self.to_dict(), **kwargs)
+    #
+    #     log.info(f"Finished computing option's pay-off![Pay-Off = {pay_off}]\n")
+    #     return pay_off
 
     def compute_price(self, model: Type[OptionPricingModel], **kwargs) -> float:
         # Check if necessary additional key-word arguments to be passed in the function
