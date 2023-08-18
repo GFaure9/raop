@@ -83,12 +83,46 @@ def cir(
     return s_t + ds
 
 
-def heston():
-    pass  # see Wiki https://en.wikipedia.org/wiki/Heston_model
+def heston(
+        s_t: Union[float, np.ndarray],
+        nu_t: Union[float, np.ndarray],
+        dt: float,
+        mu: float,
+        kappa: float,
+        theta: float,
+        ksi: float,
+) -> np.ndarray:
+    # In this model, the underlying asset's price is assumed to follow the SDE:
+    #                           dS = mu * S_t * dt + sqrt(nu_t) * S_t * dW_t^{S}
+    #                           dnu = kappa * (theta - nu_t) * dt + ksi * sqrt(nu_t) * dW_t^{nu}
+    #                               (with W_t a Wiener process)
+    # Cf. Wiki https://en.wikipedia.org/wiki/Heston_model
+    if type(s_t) != np.ndarray:
+        s_t = np.array([s_t])
+    if type(nu_t) != np.ndarray:
+        nu_t = np.array([nu_t])
+    assert len(s_t) == len(nu_t)
+    dw_nu = np.random.normal(0, np.sqrt(dt), len(nu_t))
+    dnu = kappa * (theta - nu_t) * dt + ksi * np.sqrt(nu_t) * dw_nu
+    dw_s = np.random.normal(0, np.sqrt(dt), len(s_t))
+    ds = mu * s_t * dt + np.sqrt(nu_t) * s_t * dw_s
+    return s_t + ds, nu_t + dnu
 
 
-def vg():
-    pass  # see Wiki https://en.wikipedia.org/wiki/Variance_gamma_process (Simulation)
-
-
-# todo: define different stochastic processes computation strategies
+def vg(
+        s_t: Union[float, np.ndarray],
+        dt: float,
+        theta: float,
+        sigma: float,
+        nu: float,
+) -> np.ndarray:
+    # In this model, the underlying asset's price is assumed to follow the SDE:
+    #                           dS = theta * dG + sigma * sqrt(dG) * Z
+    #                               ( with dG ~ Gamma(dt/nu, nu) and Z ~ Normal(0, 1) )
+    # see Wiki https://en.wikipedia.org/wiki/Variance_gamma_process (Simulation)
+    if type(s_t) != np.ndarray:
+        s_t = np.array([s_t])
+    dg = np.random.gamma(dt/nu, nu, len(s_t))
+    z = np.random.normal(0, 1, len(s_t))
+    ds = theta * dg + sigma * np.sqrt(dg) * z
+    return s_t + ds
