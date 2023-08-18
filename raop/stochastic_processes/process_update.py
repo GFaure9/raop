@@ -66,4 +66,29 @@ def merton_jd(
     return s_t + ds
 
 
+def cir(
+        s_t: Union[float, np.ndarray],
+        dt: float,
+        theta: float,
+        sigma: float,
+        mu: float = 0,
+) -> np.ndarray:
+    # In this model, the underlying asset's price is assumed to follow the SDE:
+    #                           dS = theta * (mu - S_t) * dt + sigma * sqrt(S_t) * dW_t
+    #                               (with W_t a Wiener process)
+    if type(s_t) != np.ndarray:
+        s_t = np.array([s_t])
+    dw = np.random.normal(0, np.sqrt(dt), len(s_t))
+    ds = theta * (mu - s_t) * dt + sigma * np.sqrt(s_t) * dw
+    return s_t + ds
+
+
+def heston():
+    pass  # see Wiki https://en.wikipedia.org/wiki/Heston_model
+
+
+def vg():
+    pass  # see Wiki https://en.wikipedia.org/wiki/Variance_gamma_process (Simulation)
+
+
 # todo: define different stochastic processes computation strategies

@@ -12,11 +12,9 @@ process_update_models = {
     "abm": ["mu", "sigma"],  # Arithmetic Brownian Motion
     "merton_jd": ["mu", "sigma", "p"],  # Merton Jump Diffusion process
     "orn_uhl": ["theta", "sigma", "mu"],  # Mean-Reverting Processes: Ornstein-Uhlenbeck process
-    "cir": [],  # Mean-Reverting Processes: Cox-Ingersoll-Ross process
+    "cir": ["theta", "sigma", "mu"],  # Mean-Reverting Processes: Cox-Ingersoll-Ross process
     "heston": [],  # Heston Model
     "vg": [],  # Variance-Gamma (VG) Model
-    "levy": [],  # Levy Processes
-    "fbm": [],  # Fractional Brownian Motion
 }
 
 
@@ -107,6 +105,8 @@ if __name__ == "__main__":
                                     theta=0.05, mu=option_euro.r, sigma=option_euro.sigma)
     MertonJD_euro = StochasticProcess(x0=option_euro.s, model_name="merton_jd",
                                       p=0.001, mu=option_euro.r, sigma=option_euro.sigma)
+    CIR_euro = StochasticProcess(x0=option_euro.s, model_name="cir",
+                                 theta=0.05, mu=option_euro.r, sigma=option_euro.sigma)
 
     from raop.utils import logger
     logger.setLevel("ERROR")
@@ -114,4 +114,5 @@ if __name__ == "__main__":
     # ABM_euro.plot(t=5, n_t=1000, n_var=100)
     # OrnUhl_euro.plot(t=5, n_t=1000, n_var=100)
     # MertonJD_euro.plot(t=5, n_t=1000, n_var=100)
+    CIR_euro.plot(t=5, n_t=1000, n_var=50)
 
