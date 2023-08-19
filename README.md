@@ -10,7 +10,6 @@ __r__(isk)-__a__(ware ) __o__(ption) __p__(ricing) Library
 _raop_ is a Python package providing several tools to analyse various types of 
 financial options while considering risk factors.
 
----
 
 ## Key Features
 
