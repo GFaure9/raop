@@ -176,6 +176,7 @@ log = logger
 
 if __name__ == "__main__":
     # log.setLevel("ERROR")
+    log.setLevel("INFO")
 
     option_euro = Option(
         name="european",
@@ -214,9 +215,6 @@ if __name__ == "__main__":
     #     volatility=0.5
     # )
 
-    option_euro.payoff()
-    option_amer.payoff()
-
     from raop.pricing_models.black_scholes import BlackScholes
     from raop.pricing_models.binomial import Binomial
     from raop.pricing_models.monte_carlo import MonteCarlo
@@ -231,14 +229,20 @@ if __name__ == "__main__":
     # option_euro.compute_price(BlackScholes)
     # option_euro.compute_price(Binomial, n_layers=15)
 
-    GBM_amer = StochasticProcess(x0=option_amer.s, model_name="gbm", mu=option_amer.r, sigma=option_amer.sigma)
-    option_amer.compute_price(MonteCarlo, stochastic_process=GBM_amer, n_processes=10000, n_t=50,
+    # GBM_amer = StochasticProcess(x0=option_amer.s, model_name="gbm", mu=option_amer.r, sigma=option_amer.sigma)
+    # VG_amer = StochasticProcess(x0=option_amer.s, model_name="vg", theta=0.001, nu=0.05, sigma=option_amer.sigma)
+    OrnUhl_amer = StochasticProcess(x0=option_amer.s, model_name="orn_uhl",
+                                    theta=0.05, mu=option_amer.r, sigma=option_amer.sigma)
+    # option_amer.compute_price(MonteCarlo, stochastic_process=GBM_amer, n_processes=10000, n_t=50,
+    #                           basis_functions="hermite", number_of_functions=20)
+    option_amer.compute_price(MonteCarlo, stochastic_process=OrnUhl_amer, n_processes=10000, n_t=50,
                               basis_functions="hermite", number_of_functions=20)
-    # option_amer.compute_price(Binomial, n_layers=20)
+    option_amer.compute_price(Binomial, n_layers=20)
 
 # todo: add standard error in MonteCarlo
 # todo: create a function StochasticProcess.from_option(Option, model_name)
 # todo: test uploading as a package in TestPyPi (with setup)
-# todo: github repo + first push
-# todo: add class/functions descriptions
+# todo: add class/functions descriptions (DOCUMENTATION)
+# todo: generate automatic doc html formatter using adapted tool
+
 

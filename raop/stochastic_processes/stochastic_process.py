@@ -130,5 +130,5 @@ if __name__ == "__main__":
     # MertonJD_euro.plot(t=1, n_t=1000, n_var=20)
     # CIR_euro.plot(t=5, n_t=1000, n_var=500)
     # Heston_euro.plot(t=5, n_t=1000, n_var=100)
-    VG_euro.plot(t=5, n_t=1000, n_var=100)
+    VG_euro.plot(t=5, n_t=1000, n_var=1000)
 
