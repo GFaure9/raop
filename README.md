@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="logo-v1.png" alt="Logo" width="450">
+  <img src="logo-v2.png" alt="Logo" width="450">
 </div>
 
 ---
@@ -86,15 +86,70 @@ and greeks depend on its parameters.
 
 ### 1. Creating an ``Option`` object
 
+To define the option, we must provide its different parameters to the instance
+of the ``Option`` class that will be created.
+
 ```py
 from raop.options import Option
 
-call_euro = Option()
+call_euro = Option(
+  name="european",
+  option_type="call",
+  underlying_price=36,
+  strike_price=40,
+  time_to_maturity=1,
+  risk_free_rate=0.06,
+  volatility=0.2
+)
+
+print("The attributes of the Option instance that we just created are:\n", call_euro.to_dict())
+```
+
+The script above will return the following result:
+
+```py
+The attributes of the Option instance that we just created are:
+ {'name': 'european', 'option_type': 'call', 's': 36, 'k': 40, 'r': 0.06, 'time_to_maturity': 1, 'sigma': 0.2}
+```
+
+### 2. Option's price computation
+
+#### a. With ``BlackScholes`` model
+
+```py
+from raop.pricing_models import BlackScholes
+
+call_euro.compute_price(BlackScholes)
+```
+
+#### b. With ``Binomial`` model
+
+```py
+from raop.pricing_models import Binomial
+
+call_euro.compute_price(Binomial, n_layers=15)
+```
+
+#### c. With ``MonteCarlo`` model
+
+```py
+from raop.stochastic_processes import StochasticProcess
+from raop.pricing_models import MonteCarlo
+
+
+gbm = StochasticProcess(x0=call_euro.s, model_name="gbm", mu=call_euro.r, sigma=call_euro.sigma)
+
+call_euro.compute_price(MonteCarlo, stochastic_process=gbm, n_processes=10000, n_t=50)
 ```
 
 ## 📖 Documentation
 
 Detailed package documentation can be found at ???
+
+
+
+
+[//]: # (https://github.com/banesullivan/README/blob/main/README.md?plain=1)
 
 
 
