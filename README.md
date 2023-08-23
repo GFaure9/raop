@@ -117,7 +117,7 @@ The Option instance 'call_euro' has the following attributes:
 To determine the valuation of the generated option, utilize the ``compute_price`` method while 
 specifying the desired pricing model as an argument. Distinct pricing models can be imported from
 the ``raop.pricing_models`` module. It may be needed to provide additional arguments depending on the
-chosen pricing model (refer to the documentation [Documentation](#documentation) for specific mandatory arguments).
+chosen pricing model (refer to the [Documentation](#documentation) for specific mandatory arguments).
 
 #### a. With ``BlackScholes`` model
 
@@ -128,24 +128,49 @@ from raop.pricing_models import BlackScholes
 
 bs_price = call_euro.compute_price(BlackScholes)
 
-print(f"The price of 'call_euro' estimated by Black-Scholes method is: {bs_price}")
+print(f"'call_euro' price estimated by Black-Scholes method is: {bs_price}")
 ```
 
 The script above will return the following result:
 
 ```
-The price of 'call_euro' estimated by Black-Scholes method is: 2.1737264482268905
+'call_euro' price estimated by Black-Scholes method is: 2.1737264482268905
 ```
 
 #### b. With ``Binomial`` model
 
+You can also employ the Cox-Ross-Rubinstein Binomial model to calculate option price. 
+Simply choose the corresponding model and specify the number of layers for the generated binomial tree as follows:
+
 ```py
 from raop.pricing_models import Binomial
 
-call_euro.compute_price(Binomial, n_layers=15)
+bino_price = call_euro.compute_price(Binomial, n_layers=20)
+
+print(f"'call_euro' price estimated by Binomial method is: {bino_price}")
+```
+
+The script above will return the following result:
+
+```
+'call_euro' price estimated by Binomial method is: 2.168536860102567
 ```
 
 #### c. With ``MonteCarlo`` model
+
+To use the Monte-Carlo method for option price computation, you will need first to define a stochastic process
+to model the evolution of the underlying asset's price over time. Different processes are already implemented in
+``raop.stochastic_processes``.
+
+<div align="center">
+  <img src="outputs/tests_outputs/test_gbm.png" alt="GBM" width="400">
+</div>
+
+In the following example, we instantiate a Geometric Brownian Motion
+``gbm`` (see the [Documentation](#documentation) of the StochasticProcess class to access 
+the available models and their abbreviations). It is also necessary to enter the desired 
+number of simulated  processes as well as the number of time steps for the processes' discretization
+($$ \Delta t = \frac{T}{n_t} $$).
 
 ```py
 from raop.stochastic_processes import StochasticProcess
@@ -154,10 +179,22 @@ from raop.pricing_models import MonteCarlo
 
 gbm = StochasticProcess(x0=call_euro.s, model_name="gbm", mu=call_euro.r, sigma=call_euro.sigma)
 
-call_euro.compute_price(MonteCarlo, stochastic_process=gbm, n_processes=10000, n_t=50)
+mc_price = call_euro.compute_price(MonteCarlo, stochastic_process=gbm, n_processes=10000, n_t=50)
+
+print(f"'call_euro' price estimated by Monte-Carlo method is: {mc_price}")
 ```
 
-## 📖 Documentation
+The script above returned the following result (note that, as long as the Monte-Carlo method is stochastic,
+this result can vary from an evaluation to another and depending on chosen the number of simulations):
+
+```
+'call_euro' price estimated by Monte-Carlo method is: 2.176008642538358
+```
+
+### 3. Option's greeks computation
+
+
+## 📖 Documentation <a id="documentation"></a>
 
 Detailed package documentation can be found at ???
 
