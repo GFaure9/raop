@@ -20,8 +20,8 @@
 
 [//]: # (</div>)
 
-[!WARNING]  
-This package is in alpha stage of development. Use at your own risk.
+> <font color="#FFA500"> ⚠ WARNING ⚠ </font>  
+> This package is in alpha stage of development. Use at your own risk.
 
 
 # raop 
