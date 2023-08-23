@@ -175,69 +175,89 @@ class Option:
 log = logger
 
 if __name__ == "__main__":
-    # log.setLevel("ERROR")
-    log.setLevel("INFO")
-
-    option_euro = Option(
-        name="european",
-        option_type="put",
-        underlying_price=36,
-        strike_price=40,
-        time_to_maturity=1,
-        risk_free_rate=0.06,
-        volatility=0.2
-    )
+    # # log.setLevel("ERROR")
+    # log.setLevel("INFO")
+    #
     # option_euro = Option(
     #     name="european",
     #     option_type="put",
-    #     underlying_price=30,
-    #     strike_price=50,
-    #     time_to_maturity=7,
-    #     risk_free_rate=0.05,
-    #     volatility=0.5
+    #     underlying_price=36,
+    #     strike_price=40,
+    #     time_to_maturity=1,
+    #     risk_free_rate=0.06,
+    #     volatility=0.2
     # )
-    option_amer = Option(
-        name="american",
-        option_type="put",
+    # # option_euro = Option(
+    # #     name="european",
+    # #     option_type="put",
+    # #     underlying_price=30,
+    # #     strike_price=50,
+    # #     time_to_maturity=7,
+    # #     risk_free_rate=0.05,
+    # #     volatility=0.5
+    # # )
+    # option_amer = Option(
+    #     name="american",
+    #     option_type="put",
+    #     underlying_price=36,
+    #     strike_price=40,
+    #     time_to_maturity=1,
+    #     risk_free_rate=0.06,
+    #     volatility=0.2
+    # )
+    # # option_amer = Option(
+    # #     name="american",
+    # #     option_type="put",
+    # #     underlying_price=30,
+    # #     strike_price=50,
+    # #     time_to_maturity=7,
+    # #     risk_free_rate=0.05,
+    # #     volatility=0.5
+    # # )
+    #
+    # from raop.pricing_models.black_scholes import BlackScholes
+    # from raop.pricing_models.binomial import Binomial
+    # from raop.pricing_models.monte_carlo import MonteCarlo
+    # from raop.stochastic_processes.stochastic_process import StochasticProcess
+    #
+    # # option_euro.compute_greeks(BlackScholes)
+    # # option_euro.compute_greeks(Binomial, n_layers=18)
+    # # option_amer.compute_greeks(Binomial, n_layers=18)
+    #
+    # GBM_euro = StochasticProcess(x0=option_euro.s, model_name="gbm", mu=option_euro.r, sigma=option_euro.sigma)
+    # option_euro.compute_price(MonteCarlo, stochastic_process=GBM_euro, n_processes=10000, n_t=100)
+    # # option_euro.compute_price(BlackScholes)
+    # # option_euro.compute_price(Binomial, n_layers=15)
+    #
+    # # GBM_amer = StochasticProcess(x0=option_amer.s, model_name="gbm", mu=option_amer.r, sigma=option_amer.sigma)
+    # # VG_amer = StochasticProcess(x0=option_amer.s, model_name="vg", theta=0.001, nu=0.05, sigma=option_amer.sigma)
+    # OrnUhl_amer = StochasticProcess(x0=option_amer.s, model_name="orn_uhl",
+    #                                 theta=0.05, mu=option_amer.r, sigma=option_amer.sigma)
+    # # option_amer.compute_price(MonteCarlo, stochastic_process=GBM_amer, n_processes=10000, n_t=50,
+    # #                           basis_functions="hermite", number_of_functions=20)
+    # option_amer.compute_price(MonteCarlo, stochastic_process=OrnUhl_amer, n_processes=10000, n_t=50,
+    #                           basis_functions="hermite", number_of_functions=20)
+    # option_amer.compute_price(Binomial, n_layers=20)
+
+    from raop.options import Option
+
+    call_euro = Option(
+        name="european",
+        option_type="call",
         underlying_price=36,
         strike_price=40,
         time_to_maturity=1,
         risk_free_rate=0.06,
         volatility=0.2
     )
-    # option_amer = Option(
-    #     name="american",
-    #     option_type="put",
-    #     underlying_price=30,
-    #     strike_price=50,
-    #     time_to_maturity=7,
-    #     risk_free_rate=0.05,
-    #     volatility=0.5
-    # )
 
-    from raop.pricing_models.black_scholes import BlackScholes
-    from raop.pricing_models.binomial import Binomial
-    from raop.pricing_models.monte_carlo import MonteCarlo
-    from raop.stochastic_processes.stochastic_process import StochasticProcess
+    # print("The attributes of the Option instance that we just created are:\n", call_euro.to_dict())
 
-    # option_euro.compute_greeks(BlackScholes)
-    # option_euro.compute_greeks(Binomial, n_layers=18)
-    # option_amer.compute_greeks(Binomial, n_layers=18)
+    from raop.pricing_models import BlackScholes
 
-    GBM_euro = StochasticProcess(x0=option_euro.s, model_name="gbm", mu=option_euro.r, sigma=option_euro.sigma)
-    option_euro.compute_price(MonteCarlo, stochastic_process=GBM_euro, n_processes=10000, n_t=100)
-    # option_euro.compute_price(BlackScholes)
-    # option_euro.compute_price(Binomial, n_layers=15)
+    bs_price = call_euro.compute_price(BlackScholes)
 
-    # GBM_amer = StochasticProcess(x0=option_amer.s, model_name="gbm", mu=option_amer.r, sigma=option_amer.sigma)
-    # VG_amer = StochasticProcess(x0=option_amer.s, model_name="vg", theta=0.001, nu=0.05, sigma=option_amer.sigma)
-    OrnUhl_amer = StochasticProcess(x0=option_amer.s, model_name="orn_uhl",
-                                    theta=0.05, mu=option_amer.r, sigma=option_amer.sigma)
-    # option_amer.compute_price(MonteCarlo, stochastic_process=GBM_amer, n_processes=10000, n_t=50,
-    #                           basis_functions="hermite", number_of_functions=20)
-    option_amer.compute_price(MonteCarlo, stochastic_process=OrnUhl_amer, n_processes=10000, n_t=50,
-                              basis_functions="hermite", number_of_functions=20)
-    option_amer.compute_price(Binomial, n_layers=20)
+    print(f"The price of 'call_euro' estimated by Black-Scholes method is: {bs_price}")
 
 # todo: add standard error in MonteCarlo
 # todo: create a function StochasticProcess.from_option(Option, model_name)
