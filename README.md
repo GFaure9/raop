@@ -20,7 +20,7 @@
 
 [//]: # (</div>)
 
-> <font color="#FFA500"> ⚠ WARNING ⚠ </font>  
+> ⚠ WARNING  
 > This package is in alpha stage of development. Use at your own risk.
 
 
