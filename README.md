@@ -20,7 +20,8 @@
 
 [//]: # (</div>)
 
-> :no_entry: ** WARNING **: This package is in alpha stage of development. Use at your own risk.
+[!WARNING] 
+This package is in alpha stage of development. Use at your own risk.
 
 
 # raop 
