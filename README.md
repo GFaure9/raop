@@ -170,7 +170,7 @@ In the following example, we instantiate a Geometric Brownian Motion
 ``gbm`` (see the [Documentation](#documentation) of the StochasticProcess class to access 
 the available models and their abbreviations). It is also necessary to enter the desired 
 number of simulated  processes as well as the number of time steps for the processes' discretization
-(`$ \Delta t = \frac{T}{n_t} $`).
+($\Delta t = \frac{T}{n_t}$).
 
 ```py
 from raop.stochastic_processes import StochasticProcess
