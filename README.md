@@ -20,7 +20,8 @@
 
 [//]: # (</div>)
 
-> :warning: **⚠ WARNING ⚠** This package is in alpha stage of development. Use at your own risk.
+> :error: ** WARNING **: This package is in alpha stage of development. Use at your own risk.
+
 
 # raop 
 __r__(isk)-__a__(ware ) __o__(ption) __p__(ricing) Library
