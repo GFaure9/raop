@@ -20,7 +20,6 @@
     border-left: 6px solid #FFA500;
     padding: 10px;
     margin-bottom: 20px;
-    font-family: 'Helvetica Neue', sans-serif;
     font-size: 18px;
   }
 </style>
