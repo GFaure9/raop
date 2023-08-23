@@ -102,24 +102,39 @@ call_euro = Option(
   volatility=0.2
 )
 
-print("The attributes of the Option instance that we just created are:\n", call_euro.to_dict())
+print("The Option instance 'call_euro' has the following attributes:\n", call_euro.to_dict())
 ```
 
 The script above will return the following result:
 
-```py
-The attributes of the Option instance that we just created are:
+```
+The Option instance 'call_euro' has the following attributes:
  {'name': 'european', 'option_type': 'call', 's': 36, 'k': 40, 'r': 0.06, 'time_to_maturity': 1, 'sigma': 0.2}
 ```
 
 ### 2. Option's price computation
 
+To determine the valuation of the generated option, utilize the ``compute_price`` method while 
+specifying the desired pricing model as an argument. Distinct pricing models can be imported from
+the ``raop.pricing_models`` module. It may be needed to provide additional arguments depending on the
+chosen pricing model (refer to the documentation [Documentation](#documentation) for specific mandatory arguments).
+
 #### a. With ``BlackScholes`` model
+
+For instance, you can use the Black–Scholes–Merton model as follows:
 
 ```py
 from raop.pricing_models import BlackScholes
 
-call_euro.compute_price(BlackScholes)
+bs_price = call_euro.compute_price(BlackScholes)
+
+print(f"The price of 'call_euro' estimated by Black-Scholes method is: {bs_price}")
+```
+
+The script above will return the following result:
+
+```
+The price of 'call_euro' estimated by Black-Scholes method is: 2.1737264482268905
 ```
 
 #### b. With ``Binomial`` model
