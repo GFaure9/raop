@@ -14,9 +14,13 @@
 [![Last Commit](https://img.shields.io/github/last-commit/GFaure9/raop)](https://github.com/your-username/your-package-name)
 
 
-<div class="warning" style="background-color: #FFE8B2; border-left: 6px solid #FFC857; padding: 10px; margin-bottom: 20px; font-size: 16px;">
-  <p>⚠ WARNING ⚠ This package is in alpha stage of development. Use at your own risk.</p>
-</div>
+[//]: # (<div class="warning" style="background-color: #FFE8B2; border-left: 6px solid #FFC857; padding: 10px; margin-bottom: 20px; font-size: 16px;">)
+
+[//]: # (  <p>⚠ WARNING ⚠ This package is in alpha stage of development. Use at your own risk.</p>)
+
+[//]: # (</div>)
+
+> :warning: **⚠ WARNING ⚠** This package is in alpha stage of development. Use at your own risk.
 
 # raop 
 __r__(isk)-__a__(ware ) __o__(ption) __p__(ricing) Library
