@@ -19,8 +19,16 @@ __r__(isk)-__a__(ware ) __o__(ption) __p__(ricing) Library
 _raop_ is a Python package providing several tools to analyse various types of 
 financial options while considering risk factors.
 
+# Table of Contents 
 
-## 🌟 Key Features
+1. [Key Features](#feats)
+2. [Installation Instructions](#install)
+3. [Usage Examples](#usage)
+4. [Documentation](#documentation)
+
+---
+
+## 🌟 Key Features <a id="feats"></a>
 
 * __Option Pricing__ and __Greeks Computation__ through multiple possible approaches
 (Black-Scholes model, Binomial tree, Monte-Carlo simulations). Available types of options are:
@@ -50,7 +58,7 @@ on its parameters.
   * __Implied Volatility Computation__
 
 
-## ⬇️ Installation Instructions
+## ⬇️ Installation Instructions <a id="install"></a>
 
 To install the package, you can either use the quick method by using ``pip``, writing the following
 command in your terminal:
@@ -72,7 +80,7 @@ pip install -e .
 
 That's it! You can now start using the package 😊!
 
-## 🚀 Usage Examples
+## 🚀 Usage Examples <a id="usage"></a>
 
 Let's see how the package can be used through some examples.
 
@@ -170,7 +178,7 @@ In the following example, we instantiate a Geometric Brownian Motion
 ``gbm`` (see the [Documentation](#documentation) of the StochasticProcess class to access 
 the available models and their abbreviations). It is also necessary to enter the desired 
 number of simulated  processes as well as the number of time steps for the processes' discretization
-($\Delta t = \frac{T}{n_t}$).
+(the time step will be $\Delta t = \frac{T}{n_t}$ with $T$ the time to maturity).
 
 ```py
 from raop.stochastic_processes import StochasticProcess
