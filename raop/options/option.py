@@ -265,14 +265,20 @@ if __name__ == "__main__":
     #
     # print(f"The price of 'call_euro' estimated by Binomial method is: {bino_price}")
 
-    from raop.stochastic_processes import StochasticProcess
-    from raop.pricing_models import MonteCarlo
+    # from raop.stochastic_processes import StochasticProcess
+    # from raop.pricing_models import MonteCarlo
+    #
+    # gbm = StochasticProcess(x0=call_euro.s, model_name="gbm", mu=call_euro.r, sigma=call_euro.sigma)
+    #
+    # mc_price = call_euro.compute_price(MonteCarlo, stochastic_process=gbm, n_processes=100000, n_t=50)
+    #
+    # print(f"'call_euro' price estimated by Monte-Carlo method is: {mc_price}")
 
-    gbm = StochasticProcess(x0=call_euro.s, model_name="gbm", mu=call_euro.r, sigma=call_euro.sigma)
+    from raop.pricing_models import BlackScholes
 
-    mc_price = call_euro.compute_price(MonteCarlo, stochastic_process=gbm, n_processes=100000, n_t=50)
+    bs_greeks = call_euro.compute_greeks(BlackScholes)
 
-    print(f"'call_euro' price estimated by Monte-Carlo method is: {mc_price}")
+    print(f"'call_euro' greeks estimated by Black-Scholes method are:\n{bs_greeks}")
 
 # todo: add standard error in MonteCarlo
 # todo: create a function StochasticProcess.from_option(Option, model_name)

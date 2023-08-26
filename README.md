@@ -25,7 +25,7 @@
 [//]: # (> __This package is in alpha stage of development. Use at your own risk__.)
 
 > [!WARNING]
-> This package is in alpha stage of development. Use at your own risk
+> __This package is in alpha stage of development. Use at your own risk.__
 
 
 # raop 
@@ -228,9 +228,22 @@ this result can vary from an evaluation to another and depending on chosen the n
 
 Similarly, you can calculate the option's greeks using the ``compute_greeks`` method.
 The computation models available here are identical to those used for price calculations.
+The following code shows an example of implementation for the same option as before:
 
+```py
+from raop.pricing_models import BlackScholes
 
+bs_greeks = call_euro.compute_greeks(BlackScholes)
 
+print(f"'call_euro' greeks estimated by Black-Scholes method are:\n{bs_greeks}")
+```
+
+The script above will return the following result:
+
+```
+'call_euro' greeks estimated by Black-Scholes method are:
+{'delta': 0.4495483275166151, 'gamma': 0.05496498097080381, 'vega': 14.246923067632347, 'theta': -2.26529310730551, 'rho': 14.01001334237125}
+```
 
 ## 📖 Documentation <a id="documentation"></a>
 
