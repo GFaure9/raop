@@ -285,8 +285,8 @@ graph_surf.plot_surface()
 The following graphs will be plotted:
 
 <div style="display: flex; justify-content: center; gap: 20px;">
-  <img src="outputs/tests_outputs/test_curve.png" alt="curve" style="width: 50%;">
-  <img src="outputs/tests_outputs/test_surface.png" alt="surf" style="width: 50%;">
+  <img src="outputs/tests_outputs/test_curve.png" alt="curve" style="width: 45%;">
+  <img src="outputs/tests_outputs/test_surface.png" alt="surf" style="width: 45%;">
 </div>
 
 It's worth noting that you can also directly access the sensitivity study values
