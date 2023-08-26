@@ -255,7 +255,7 @@ from raop.pricing_models import BlackScholes, Binomial
 from raop.graphs import Graph
 
 # Sensitivity analyses of Gamma VS Underlying Price
-dataframe_curve = call_euro.sensitivity(
+df_curve = call_euro.sensitivity(
     output="gamma",
     variable="underlying_price",
     variations=(-50, 50),
@@ -264,11 +264,11 @@ dataframe_curve = call_euro.sensitivity(
 )
 
 # Plot from the computed data
-graph_curve = Graph(dataframe_curve)
+graph_curve = Graph(df_curve)
 graph_curve.plot_curve()
 
 # Sensitivity analyses of Option's Price VS Volatilty and Strike Price
-dataframe_surf = call_euro.sensitivity(
+df_surf = call_euro.sensitivity(
     output="option_price",
     variable=["volatility", "strike_price"],
     variations=[(-50, 1000), (-50, 20)],
@@ -278,17 +278,40 @@ dataframe_surf = call_euro.sensitivity(
 )
 
 # Creating a plot from the computed data
-graph_surf = Graph(dataframe_surf)
+graph_surf = Graph(df_surf)
 graph_surf.plot_surface()
 ```
 
 The following graphs will be plotted:
 
 <div style="display: flex; justify-content: center; gap: 20px;">
-  <img src="outputs/tests_outputs/test_curve.png" alt="curve" style="width: 40%;">
-  <img src="outputs/tests_outputs/test_surface.png" alt="surf" style="width: 40%;">
+  <img src="outputs/tests_outputs/test_curve.png" alt="curve" style="width: 50%;">
+  <img src="outputs/tests_outputs/test_surface.png" alt="surf" style="width: 50%;">
 </div>
 
+It's worth noting that you can also directly access the sensitivity study values
+using the generated pd.DataFrame, as shown below:
+
+```py
+print(f"Option's Price VS Volatilty and Strike Price pd.DataFrame:\n{df_surf}")
+```
+```
+Option's Price VS Volatilty and Strike Price pd.DataFrame:
+     volatility  strike_price  option_price
+0           0.1     20.000000      0.000000
+1           0.1     21.473684      0.000000
+2           0.1     22.947368      0.000000
+3           0.1     24.421053      0.000000
+4           0.1     25.894737      0.000000
+..          ...           ...           ...
+395         2.2     42.105263     27.032943
+396         2.2     43.578947     28.115194
+397         2.2     45.052632     29.197446
+398         2.2     46.526316     30.279697
+399         2.2     48.000000     31.361948
+
+[400 rows x 3 columns]
+```
 
 ## 📖 Documentation <a id="documentation"></a>
 

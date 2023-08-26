@@ -157,3 +157,5 @@ if __name__ == "__main__":
     )
     graph_surf = Graph(dataframe_surf)
     graph_surf.plot_surface(save_path=f"{out_path}/test_surface.png")
+
+    print(f"Option's Price VS Volatilty and Strike Price pd.DataFrame:\n{dataframe_surf}")
