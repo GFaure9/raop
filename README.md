@@ -20,8 +20,12 @@
 
 [//]: # (</div>)
 
-> ⚠ __WARNING__  
-> __This package is in alpha stage of development. Use at your own risk__.
+[//]: # (> ⚠ __WARNING__  )
+
+[//]: # (> __This package is in alpha stage of development. Use at your own risk__.)
+
+> [!WARNING]
+> This package is in alpha stage of development. Use at your own risk
 
 
 # raop 
@@ -140,6 +144,14 @@ specifying the desired pricing model as an argument. Distinct pricing models can
 the ``raop.pricing_models`` module. It may be needed to provide additional arguments depending on the
 chosen pricing model (refer to the [Documentation](#documentation) for specific mandatory arguments).
 
+[//]: # (> 🛈 The pricing model may have to be chosen according to the option. Some models are not suitable for certain)
+
+[//]: # (> types of options. In that case, an error message will be displayed. )
+
+> [!NOTE]
+> The pricing model may have to be chosen according to the option. Some models are not suitable for certain
+> types of options. In that case, an error message will be displayed. 
+
 #### a. With ``BlackScholes`` model
 
 For instance, you can use the Black–Scholes–Merton model as follows:
@@ -213,6 +225,11 @@ this result can vary from an evaluation to another and depending on chosen the n
 ```
 
 ### 3. Option's greeks computation
+
+Similarly, you can calculate the option's greeks using the ``compute_greeks`` method.
+The computation models available here are identical to those used for price calculations.
+
+
 
 
 ## 📖 Documentation <a id="documentation"></a>
