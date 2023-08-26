@@ -80,7 +80,7 @@ class StochasticProcess:
         fig, ax = plt.subplots()
         ax.set_title(f"{self.model_name} stochastic process(es) from t=0 to t={t}")
         ax.set_xlabel("Time")
-        ax.set_ylabel("Stochastic process(es)")
+        ax.set_ylabel("Stochastic process(es) values")
         ax.grid(True, alpha=0.5, ls="--")
         for process in processes:
             ax.plot(time, process, linestyle="-")
@@ -100,14 +100,24 @@ log = logger
 if __name__ == "__main__":
     from raop.options.option import Option
 
+    # option_euro = Option(
+    #     name="european",
+    #     option_type="put",
+    #     underlying_price=30,
+    #     strike_price=120,
+    #     time_to_maturity=10,
+    #     risk_free_rate=0.05,
+    #     volatility=0.5
+    # )
+
     option_euro = Option(
         name="european",
-        option_type="put",
-        underlying_price=30,
-        strike_price=120,
-        time_to_maturity=10,
-        risk_free_rate=0.05,
-        volatility=0.5
+        option_type="call",
+        underlying_price=36,
+        strike_price=40,
+        time_to_maturity=1,
+        risk_free_rate=0.06,
+        volatility=0.2
     )
 
     mu = option_euro.r
@@ -124,11 +134,11 @@ if __name__ == "__main__":
 
     from raop.utils import logger
     logger.setLevel("ERROR")
-    # GBM_euro.plot(t=5, n_t=1000, n_var=2)
+    GBM_euro.plot(t=1, n_t=1000, n_var=100, save_path="../../outputs/tests_outputs/test_gbm")
     # ABM_euro.plot(t=5, n_t=1000, n_var=100)
     # OrnUhl_euro.plot(t=5, n_t=1000, n_var=100)
     # MertonJD_euro.plot(t=1, n_t=1000, n_var=20)
     # CIR_euro.plot(t=5, n_t=1000, n_var=500)
     # Heston_euro.plot(t=5, n_t=1000, n_var=100)
-    VG_euro.plot(t=5, n_t=1000, n_var=1000)
+    # VG_euro.plot(t=5, n_t=1000, n_var=1000)
 

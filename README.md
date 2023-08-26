@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="logo-v2.png" alt="Logo" width="450">
+  <img src="logo-v3.png" alt="Logo" width="400">
 </div>
 
 ---
@@ -150,7 +150,7 @@ chosen pricing model (refer to the [Documentation](#documentation) for specific 
 
 > [!NOTE]
 > The pricing model may have to be chosen according to the option. Some models are not suitable for certain
-> types of options. In that case, an error message will be displayed. 
+> types of options: in that case, an error message will be displayed. 
 
 #### a. With ``BlackScholes`` model
 
@@ -245,12 +245,54 @@ The script above will return the following result:
 {'delta': 0.4495483275166151, 'gamma': 0.05496498097080381, 'vega': 14.246923067632347, 'theta': -2.26529310730551, 'rho': 14.01001334237125}
 ```
 
+### 4. Sensitivity analyses: plotting graphs
+
+The package also facilitates sensitivity analyses of option parameters on valuation
+outputs and enables the creation of graphs based on these analyses.
+
+```py
+from raop.pricing_models import BlackScholes, Binomial
+from raop.graphs import Graph
+
+# Sensitivity analyses of Gamma VS Underlying Price
+dataframe_curve = call_euro.sensitivity(
+    output="gamma",
+    variable="underlying_price",
+    variations=(-50, 50),
+    num=100,
+    model=BlackScholes,  # using Black-Scholes model
+)
+
+# Plot from the computed data
+graph_curve = Graph(dataframe_curve)
+graph_curve.plot_curve()
+
+# Sensitivity analyses of Option's Price VS Volatilty and Strike Price
+dataframe_surf = call_euro.sensitivity(
+    output="option_price",
+    variable=["volatility", "strike_price"],
+    variations=[(-50, 1000), (-50, 20)],
+    num=20,
+    model=Binomial,  # using Binomial model with 10 layers
+    n_layers=10,
+)
+
+# Creating a plot from the computed data
+graph_surf = Graph(dataframe_surf)
+graph_surf.plot_surface()
+```
+
+The following graphs will be plotted:
+
+<div style="display: flex; justify-content: center; gap: 20px;">
+  <img src="outputs/tests_outputs/test_curve.png" alt="curve" style="width: 40%;">
+  <img src="outputs/tests_outputs/test_surface.png" alt="surf" style="width: 40%;">
+</div>
+
+
 ## 📖 Documentation <a id="documentation"></a>
 
 Detailed package documentation can be found at ???
-
-
-
 
 [//]: # (https://github.com/banesullivan/README/blob/main/README.md?plain=1)
 

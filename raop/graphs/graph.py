@@ -137,17 +137,17 @@ if __name__ == "__main__":
     graph_curve = Graph(dataframe_curve)
     graph_curve.plot_curve(save_path=f"{out_path}/test_curve.png")
 
-    option_amer = Option(
-        name="american",
-        option_type="put",
-        underlying_price=36,
-        strike_price=40,
-        time_to_maturity=1,
-        risk_free_rate=0.06,
-        volatility=0.2
-    )
+    # option_amer = Option(
+    #     name="american",
+    #     option_type="put",
+    #     underlying_price=36,
+    #     strike_price=40,
+    #     time_to_maturity=1,
+    #     risk_free_rate=0.06,
+    #     volatility=0.2
+    # )
 
-    dataframe_surf = option_amer.sensitivity(
+    dataframe_surf = option_euro.sensitivity(
         output="option_price",
         variable=["volatility", "strike_price"],
         variations=[(-50, 1000), (-50, 20)],
