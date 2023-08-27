@@ -315,7 +315,7 @@ Option's Price VS Volatilty and Strike Price pd.DataFrame:
 
 ## 📖 Documentation <a id="documentation"></a>
 
-Detailed package documentation can be found [here](./html/raop/index.html).
+Detailed package documentation can be found [here](https://gfaure9.github.io/raop_documentation/).
 
 [//]: # (https://github.com/banesullivan/README/blob/main/README.md?plain=1)
 
