@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
 
-from raop.utils import logger
+# from raop.utils import logger
 
 
 class Graph:
@@ -108,54 +108,4 @@ class Graph:
 
 
 if __name__ == "__main__":
-    from raop.options.option import Option
-    from raop.pricing_models.black_scholes import BlackScholes
-    from raop.pricing_models.binomial import Binomial
-    from raop.utils.find_root_path import find_project_root
-
-    logger.setLevel("ERROR")
-
-    out_path = find_project_root() + "/outputs/tests_outputs"
-
-    option_euro = Option(
-        name="european",
-        option_type="put",
-        underlying_price=36,
-        strike_price=40,
-        time_to_maturity=1,
-        risk_free_rate=0.06,
-        volatility=0.2
-    )
-
-    dataframe_curve = option_euro.sensitivity(
-        output="gamma",
-        variable="underlying_price",
-        variations=(-50, 50),
-        num=100,
-        model=BlackScholes,
-    )
-    graph_curve = Graph(dataframe_curve)
-    graph_curve.plot_curve(save_path=f"{out_path}/test_curve.png")
-
-    # option_amer = Option(
-    #     name="american",
-    #     option_type="put",
-    #     underlying_price=36,
-    #     strike_price=40,
-    #     time_to_maturity=1,
-    #     risk_free_rate=0.06,
-    #     volatility=0.2
-    # )
-
-    dataframe_surf = option_euro.sensitivity(
-        output="option_price",
-        variable=["volatility", "strike_price"],
-        variations=[(-50, 1000), (-50, 20)],
-        num=20,
-        model=Binomial,
-        n_layers=10,
-    )
-    graph_surf = Graph(dataframe_surf)
-    graph_surf.plot_surface(save_path=f"{out_path}/test_surface.png")
-
-    print(f"Option's Price VS Volatilty and Strike Price pd.DataFrame:\n{dataframe_surf}")
+    pass

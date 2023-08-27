@@ -102,12 +102,12 @@ That's it! You can now start using the package 😊!
 Let's see how the package can be used through some examples.
 
 We will first see how to instantiate a European call option and estimate its price with
-the Black-Scholes model, with the Binomial model and with Monte-Carlo simulations.
-
-We will then see how we can also compute the greeks of this option.
-
+the Black-Scholes model, with the Binomial model and with Monte-Carlo simulations.\
+We will then see how we can also compute the greeks of this option.\
 Finally, we will learn how to plot some graphs to understand how the option's price
 and greeks depend on its parameters.
+
+The following scripts are consolidated in [base_example.py](examples/base_example.py).
 
 ### 1. Creating an ``Option`` object
 
@@ -258,7 +258,7 @@ from raop.graphs import Graph
 df_curve = call_euro.sensitivity(
     output="gamma",
     variable="underlying_price",
-    variations=(-50, 50),
+    variations=(-50, 50),  # +/- 50% variations of option's underlying price 
     num=100,
     model=BlackScholes,  # using Black-Scholes model
 )
