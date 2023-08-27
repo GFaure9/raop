@@ -15,12 +15,12 @@ class Graph:
         The first columns are the variables.
 
     Methods:
-        plot_curve(x, y, save_path): 'x' and 'y' are the names of the columns containing the
+        plot_curve (x, y, save_path): 'x' and 'y' are the names of the columns containing the
         data for resp. x and y-axis. If nothing is provided, default is x=first column name
         and y=second column name. 'save_path' is the path at where the plot will be dumped.
         If nothing is provided, the plot will just be displayed and not saved.
 
-        plot_surface(x, y, z, save_path): same as plot_curve method but to plot a surface.
+        plot_surface (x, y, z, save_path): same as plot_curve method but to plot a surface.
         It needs a 3-columns dataframe.
     """
     def __init__(self, df: pd.DataFrame):
