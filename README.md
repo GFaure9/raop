@@ -218,7 +218,7 @@ print(f"'call_euro' price estimated by Monte-Carlo method is: {mc_price}")
 ```
 
 The script above returned the following result (note that, as long as the Monte-Carlo method is stochastic,
-this result can vary from an evaluation to another and depending on chosen the number of simulations):
+this result can vary from an evaluation to another and depending on the chosen number of simulations):
 
 ```
 'call_euro' price estimated by Monte-Carlo method is: 2.176008642538358
