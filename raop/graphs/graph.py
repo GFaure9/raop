@@ -16,8 +16,8 @@ class Graph:
 
     Methods:
         **plot_curve** (`x`, `y`, `save_path`): `x` and `y` are the names of the columns containing the
-        data for resp. x and y-axis. If nothing is provided, default is x=first column name
-        and y=second column name. 'save_path' is the path at where the plot will be dumped.
+        data for resp. x and y-axis. If nothing is provided, default is `x`=_first column name_
+        and `y`=_second column name_. `save_path` is the path at where the plot will be dumped.
         If nothing is provided, the plot will just be displayed and not saved.
 
         **plot_surface** (`x`, `y`, `z`, `save_path`): same as plot_curve method but to plot a surface.
@@ -70,12 +70,13 @@ class Graph:
         """
         Create a plot of a surface from self.df data, and save it to 'save_path' if not None.
         self.df must be as follows:
-                            | variable1_name | variable2_name |   output_name   |
-                            |--------------- |--------------- |-----------------|
-                            |       x1       |       y1       |    f(x1, y1)    |
-                            |       x2       |       y2       |    f(x2, y2)    |
-                            |       ...      |       ...      |       ...       |
-                            |       xN       |       yN       |    f(xN, yN)    |
+
+                    | variable1_name | variable2_name |   output_name   |
+                    |--------------- |--------------- |-----------------|
+                    |       x1       |       y1       |    f(x1, y1)    |
+                    |       x2       |       y2       |    f(x2, y2)    |
+                    |       ...      |       ...      |       ...       |
+                    |       xN       |       yN       |    f(xN, yN)    |
         Args:
             x (str): name of the column in self.df for x-axis data. First column if None.
             y (str): name of the column in self.df for y-axis data. Second column if None.
@@ -83,7 +84,7 @@ class Graph:
             save_path (str): path to save plot. Default value is None.
 
         Returns:
-            None: nothing is returned. The curve is displayed if 'save_path' is None.
+            None: nothing is returned. The curve is displayed if `save_path` is None.
         """
         if x is None or y is None or z is None:
             x, y, z = self.df.keys()
