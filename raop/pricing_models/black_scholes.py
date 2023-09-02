@@ -8,7 +8,6 @@ from scipy.stats import norm
 
 class BlackScholes(OptionPricingModel):
     def __init__(self, option):
-        # todo: add class/functions descriptions
         super().__init__(option)
 
         if self.option.name != "european":
@@ -84,7 +83,6 @@ class BlackScholes(OptionPricingModel):
 
     @property
     def _theta(self) -> float:
-        # todo: check if there is an error... (with multiple tests)
         log.info(f"Computing Theta...")
 
         opt = self.option

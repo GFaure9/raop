@@ -3,7 +3,6 @@ from collections import namedtuple
 
 class OptionPricingModel:
     def __init__(self, option: dict, **kwargs):
-        # todo: add class/functions descriptions
         Option = namedtuple("Option", [key for key in option.keys()])
         self.option = Option(*option.values())
 

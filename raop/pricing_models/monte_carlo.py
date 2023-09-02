@@ -11,7 +11,6 @@ class MonteCarlo(OptionPricingModel):
     def __init__(self, option,
                  stochastic_process: StochasticProcess, n_processes: int, n_t: int,
                  basis_functions: str = None, number_of_functions: int = None):
-        # todo: add class/functions descriptions
         super().__init__(option)
         self.name = "Monte-Carlo"
         self.stochastic_process = stochastic_process

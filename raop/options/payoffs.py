@@ -3,7 +3,6 @@ import numpy as np
 from typing import Union
 
 
-# todo: add class/functions descriptions
 def european(
         s: Union[float, np.ndarray],
         k: float,
@@ -38,5 +37,4 @@ def american(s_0_to_t: np.ndarray = None, **kwargs):
 
 
 def asian():
-    # todo: implement
     pass

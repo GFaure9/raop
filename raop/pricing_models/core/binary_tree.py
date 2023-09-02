@@ -56,7 +56,6 @@ from typing import Callable, Tuple, List
 # ###############################################################################################
 
 
-# todo: add class/functions descriptions
 def create_binary_tree(
         n_layers: int,
         u: float,

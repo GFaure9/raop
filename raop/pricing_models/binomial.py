@@ -11,7 +11,6 @@ from typing import Union
 
 
 class Binomial(OptionPricingModel):
-    # todo: if possible accelerate even more by using C# or C++ code (main problem: storing all variables)
     def __init__(self, option, n_layers: int):
         super().__init__(option)
 
@@ -21,7 +20,7 @@ class Binomial(OptionPricingModel):
             log.error(error_msg)
             raise ValueError(error_msg)
 
-        self.name = "Binomial [Cox-Ross-Rubinstein]"  # todo: maybe add other sub-models: Jarrow-Rudd ? Leisen-Reimer ?
+        self.name = "Binomial [Cox-Ross-Rubinstein]"
         self.n_layers = n_layers
 
     def compute_price(
@@ -184,7 +183,6 @@ class Binomial(OptionPricingModel):
             other_r: float = None,
             other_time_to_maturity: float = None
     ) -> float:
-        # todo: add q in some way if possible: (r-q) instead of r
         dt = self._dt(other_time_to_maturity)
         u, d = self._u(other_sigma), self._d(other_sigma)
         r = self.option.r
