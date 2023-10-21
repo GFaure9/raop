@@ -168,12 +168,13 @@ class Option:
         greeks...).
         Args:
             output (str): name of the output. Possible outputs are:
-                            "option_price",
-                            "delta",
-                            "gamma",
-                            "theta",
-                            "vega",
-                            "rho",
+
+                    "option_price"
+                    "delta"
+                    "gamma"
+                    "theta"
+                    "vega"
+                    "rho"
             variable (Union[str, List[str]]): name or list of names of varying parameters for the sensitivity study.
             variations (Union[Tuple, List[Tuple]]): i-th tuple contains the +/- percentages of variation to apply to the i-th parameter in `variable`.
             model (Type[OptionPricingModel]): subclass of `OptionPricingModel` that will be used to compute the output.

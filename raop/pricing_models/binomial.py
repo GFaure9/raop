@@ -11,6 +11,27 @@ from typing import Union
 
 
 class Binomial(OptionPricingModel):
+    """
+    Subclass of `OptionPricingModel` defining a pricing model that uses the binomial method.
+
+    Attributes:
+        option (collections.namedtuple): its keys are:
+
+                "name"
+                "option_type"
+                "s"
+                "k"
+                "r"
+                "time_to_maturity"
+                "sigma"
+        name (str): name of the pricing model. Default is "Binomial [Cox-Ross-Rubinstein]".
+        n_layers (int): number of layers of the binomial tree built for pricing.
+
+    Methods:
+        **compute_price**: estimate the price of the option described in `option` using the binomial method.
+
+        **compute_greeks**: estimate the greeks of the option described in `option` using the binomial method.
+    """
     def __init__(self, option, n_layers: int):
         super().__init__(option)
 
@@ -29,7 +50,24 @@ class Binomial(OptionPricingModel):
             other_sigma: float = None,
             other_r: float = None,
             other_time_to_maturity: float = None,
-    ):
+    ) -> float:
+        """
+        Estimate `self.option` 's price using binomial method.
+        In particular, it uses the following `raop.pricing_models.core` functions: `create_binary_tree`, `compute_last_option_prices` and
+        `compute_previous_option_prices`.
+
+        For further details on the binomial method, see for example
+        [the Binomial Model Wikipedia page](https://en.wikipedia.org/wiki/Binomial_options_pricing_model).
+
+        Args:
+            other_s (float): potential new value for underlying price. Default is None. If not, the given value is taken for option's underlying instead of `self.option.s`.
+            other_sigma (float): potential new value for volatility. Default is None. If not, the given value is taken for option's volatility instead of `self.option.sigma`.
+            other_r (float): potential new value for return rate. Default is None. If not, the given value is taken for option's return rate of `self.option.r`.
+            other_time_to_maturity (float): potential new value for time to maturity. Default is None. If not, the given value is taken for option's time to maturity instead of `self.option.time_to_maturity`.
+
+        Returns:
+            float: option's price estimated with the binomial method.
+        """
         log.info(f"Started computing option's price with {self.name} method...")
         log.info(f"Number of layers of the tree: {self.n_layers}")
 
@@ -70,6 +108,18 @@ class Binomial(OptionPricingModel):
         return price
 
     def compute_greeks(self) -> dict:
+        """
+        Compute `self.option` 's greeks using binomial method.
+
+        Returns:
+            dict: dictionary containing values of `self.option` 's greeks estimated with the binomial method. Its keys are:
+
+                    "delta"
+                    "gamma"
+                    "vega"
+                    "theta"
+                    "rho"
+        """
         log.info(f"Started computing option's Greeks with {self.name} method...")
 
         price = self.compute_price()

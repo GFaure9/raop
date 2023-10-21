@@ -1,4 +1,6 @@
-/raop.egg-info/
-/dist/
+raop.egg-info/
+dist/
 __pychache__/
 .idea/
+html/
+venv/

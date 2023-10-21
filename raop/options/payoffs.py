@@ -10,6 +10,19 @@ def european(
         s_0_to_t: np.ndarray = None,
         **kwargs
 ) -> Union[float, np.ndarray]:
+    """
+    Implement computation of instantaneous european option's payoff: $$Call_t(S_t, K_t) = max(S_t - K_t, 0)$$ $$Put_t(S_t, K_t) = max(K_t - S_t, 0)$$
+
+    Args:
+        s (Union[float, np.ndarray]): underlying price of the option. Also accepts an array of underlying prices.
+        k (float): strike price of the option.
+        option_type: type of the option. Either "put" or "call".
+        s_0_to_t (np.ndarray): underlying prices from time 0 to t. Default value is None. If not, `s` will be set equal to array's last row (prices at time t).
+        **kwargs:
+
+    Returns:
+        Union[float, np.ndarray]: if `s` is a float, the function returns a float corresponding to option's payoff. If `s` is an array, returns an array with option's payoffs corresponding to each price.
+    """
 
     if s_0_to_t is not None:
         s = s_0_to_t[-1, :]
@@ -27,7 +40,17 @@ def european(
     return pay_offs
 
 
-def american(s_0_to_t: np.ndarray = None, **kwargs):
+def american(s_0_to_t: np.ndarray = None, **kwargs) -> Union[float, np.ndarray]:
+    """
+    Implement computation of instantaneous american option's payoff.
+
+    Args:
+        s_0_to_t (np.ndarray): underlying prices from time 0 to t. Default value is None. If not, `s` will be set equal to the array.
+        **kwargs: same arguments as those of `european` function.
+
+    Returns:
+        Union[float, np.ndarray]: if `s` is a float, the function returns a float corresponding to option's payoff. If `s` is an array, returns an array with option's payoffs corresponding to each price.
+    """
     if s_0_to_t is not None:
         kwargs["s"] = s_0_to_t
         pay_offs = european(**kwargs)
