@@ -66,7 +66,7 @@ class MonteCarlo(OptionPricingModel):
         $$V = \\frac{1}{N} \sum_{i=1}^{N}{e^{-r (T - t)} Payoff(S_i)}$$
 
         For American options, Longstaff-Schwarz method is used: see for example
-        [this Oxford's university presentation](https://people.maths.ox.ac.uk/gilesm/mc/module_6/american.pdf)
+        [this Oxford University's presentation](https://people.maths.ox.ac.uk/gilesm/mc/module_6/american.pdf)
         for a detailed description of the method.
 
         Returns:
