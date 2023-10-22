@@ -31,7 +31,7 @@ class Option:
         `model` selected among subclasses of `OptionPricingModel`.
 
         **compute_greeks** (`model`): return the greeks of the option estimated with a `model`
-        selected among subclasses of `OptionPricingModel`.
+        selected among subclasses of `raop.pricing_models.pricing_model.OptionPricingModel`.
 
         **sensitivity** (`output`, `variable`, `variations`, `model`, `num`): return a
         `pd.DataFrame` containing the estimated values of `output` (a string) when varying the
@@ -114,7 +114,7 @@ class Option:
         Display log with potential additional key-word arguments that need to be specified
         when using a certain `model`.
         Args:
-            model (Type[OptionPricingModel]): subclass of `OptionPricingModel`.
+            model (Type[OptionPricingModel]): subclass of `raop.pricing_models.pricing_model.OptionPricingModel`.
 
         Returns:
             None: will display a warning message if extra arguments are required and log level is set to DEBUG.
@@ -132,8 +132,8 @@ class Option:
         """
         Estimate the price of the option using the `model` approach.
         Args:
-            model (Type[OptionPricingModel]): subclass of `OptionPricingModel` that will be used to compute option's price.
-            **kwargs: potentially required extra arguments depending on the chosen `OptionPricingModel` subclass.
+            model (Type[OptionPricingModel]): subclass of `raop.pricing_models.pricing_model.OptionPricingModel` that will be used to compute option's price.
+            **kwargs: potentially required extra arguments depending on the chosen `raop.pricing_models.pricing_model.OptionPricingModel` subclass.
 
         Returns:
             float: computed option's price.
@@ -145,8 +145,8 @@ class Option:
         """
         Estimate the greeks of the option using the `model` approach.
         Args:
-            model (Type[OptionPricingModel]): subclass of `OptionPricingModel` that will be used to compute option's greeks.
-            **kwargs: potentially required extra arguments depending on the chosen `OptionPricingModel` subclass.
+            model (Type[OptionPricingModel]): subclass of `raop.pricing_models.pricing_model.OptionPricingModel` that will be used to compute option's greeks.
+            **kwargs: potentially required extra arguments depending on the chosen `raop.pricing_models.pricing_model.OptionPricingModel` subclass.
 
         Returns:
             dict: computed option's greeks.
@@ -177,9 +177,9 @@ class Option:
                     "rho"
             variable (Union[str, List[str]]): name or list of names of varying parameters for the sensitivity study.
             variations (Union[Tuple, List[Tuple]]): i-th tuple contains the +/- percentages of variation to apply to the i-th parameter in `variable`.
-            model (Type[OptionPricingModel]): subclass of `OptionPricingModel` that will be used to compute the output.
+            model (Type[OptionPricingModel]): subclass of `raop.pricing_models.pricing_model.OptionPricingModel` that will be used to compute the output.
             num (int): number of subdivisions of the parameters' variations ranges.
-            **kwargs: potentially required extra arguments depending on the chosen `OptionPricingModel` subclass.
+            **kwargs: potentially required extra arguments depending on the chosen `raop.pricing_models.pricing_model.OptionPricingModel` subclass.
 
         Returns:
             pd.DataFrame: pandas DataFrame object containing parameters and corresponding output values.

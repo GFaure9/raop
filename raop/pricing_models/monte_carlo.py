@@ -8,6 +8,37 @@ from raop.pricing_models.core import monte_carlo
 
 
 class MonteCarlo(OptionPricingModel):
+    """
+    Subclass of `OptionPricingModel` defining a pricing model that uses the Monte-Carlo method.
+
+    Attributes:
+        option (collections.namedtuple): its keys are:
+
+                "name"
+                "option_type"
+                "s"
+                "k"
+                "r"
+                "time_to_maturity"
+                "sigma"
+        name (str): name of the pricing model. Default is "Monte-Carlo".
+        stochastic_process (raop.stochastic_processes.stochastic_process.StochasticProcess): object defining the stochastic process that models the evolution of underlying asset's price.
+        n_processes (int): number of simulated processes in the method.
+        basis_functions (str): type of basis functions used when pricing American options using the Longstaff-Schwarz method (LSM). Default value is "laguerre". Possibilities are:
+
+                "laguerre"
+                "hermite"
+                "legendre"
+                "jacobi"
+                "chebyt"  # Chebyshev polynomials
+                "gegenbauer"
+        number_of_functions (int): number of basis functions used to approximate continuation values in LSM. Default value is 20.
+
+    Methods:
+        **compute_price**: estimate the price of the option described in `option` using Monte-Carlo method.
+
+        **compute_greeks**: estimate the greeks of the option described in `option` using Monte-Carlo method.
+    """
     def __init__(self, option,
                  stochastic_process: StochasticProcess, n_processes: int, n_t: int,
                  basis_functions: str = None, number_of_functions: int = None):
@@ -25,6 +56,22 @@ class MonteCarlo(OptionPricingModel):
             self.number_of_functions = number_of_functions
 
     def compute_price(self):
+        """
+        Compute `self.option` 's price using the Monte-Carlo method.
+
+        For European options, it consists in simulating `self.n_processes` possible evolutions
+        of underlying price up to maturity date
+        (using `raop.stochastic_processes.stochastic_process.StochasticProcess`),
+        and averaging the discounted final payoffs of all cases.
+        $$V = \\frac{1}{N} \sum_{i=1}^{N}{e^{-r (T - t)} Payoff(S_i)}$$
+
+        For American options, Longstaff-Schwarz method is used: see for example
+        [this Oxford's university presentation](https://people.maths.ox.ac.uk/gilesm/mc/module_6/american.pdf)
+        for a detailed description of the method.
+
+        Returns:
+            float: option's price estimated with the Monte-Carlo method.
+        """
         log.info(f"Started computing option's price with {self.name} method...")
 
         opt = self.option

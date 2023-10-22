@@ -2,12 +2,6 @@
 
 # todo: create a function StochasticProcess.from_option(Option, model_name)
 
-# todo: test uploading as a package in TestPyPi (with setup)
-
-# todo: add class/functions descriptions (DOCUMENTATION)
-
-# todo: generate automatic doc html formatter using adapted tool
-
 # todo: maybe add 'q' to the arguments, the dividend yield of the underlying
 
 # todo: complete/adapt the framework for asian options

@@ -1,14 +1,26 @@
 import numpy as np
 
-from typing import Union
+from typing import Union, Tuple
 
 
 def gbm(s_t: Union[float, np.ndarray], dt: float, mu: float, sigma: float) -> np.ndarray:
-    # In this model, the underlying asset's price is assumed to follow the SDE:
-    #                           dS = mu * S_t * dt + sigma * S_t * dW_t
-    #                               (with W_t a Wiener process)
-    #          (i.e. with dW_t a normal random variables with expected value zero and variance dt)
-    # In the last equation, mu represents the drift and sigma the volatility.
+    """
+    Compute `s_t` at time step `t + dt` considering that it follows a Geometric Brownian Motion
+    characterized by the SDE:
+    $$dS = \\mu S_t dt + \sigma S_t dW_t$$
+
+    Where:
+    $$dW_t \sim \mathcal{N}(0, dt)$$
+
+    Args:
+        s_t (Union[float, np.ndarray]): random variable(s) value(s) at current time.
+        dt (float): time step increment.
+        mu (float): drift of the process.
+        sigma (float): volatility of the process.
+
+    Returns:
+        np.ndarray: value(s) of random variable(s) at next time (current time incremented by `dt`).
+    """
     if type(s_t) != np.ndarray:
         s_t = np.array([s_t])
     dw = np.random.normal(0, np.sqrt(dt), len(s_t))
@@ -17,9 +29,23 @@ def gbm(s_t: Union[float, np.ndarray], dt: float, mu: float, sigma: float) -> np
 
 
 def abm(s_t: Union[float, np.ndarray], dt: float, mu: float, sigma: float) -> np.ndarray:
-    # In this model, the underlying asset's price is assumed to follow the SDE:
-    #                           dS = mu * dt + sigma * dW_t
-    #                               (with W_t a Wiener process)
+    """
+    Compute `s_t` at time step `t + dt` considering that it follows a Arithmetic Brownian Motion
+    characterized by the SDE:
+    $$dS = \\mu dt + \sigma dW_t$$
+
+    Where:
+    $$dW_t \sim \mathcal{N}(0, dt)$$
+
+    Args:
+        s_t (Union[float, np.ndarray]): random variable(s) value(s) at current time.
+        dt (float): time step increment.
+        mu (float): drift of the process.
+        sigma (float): volatility of the process.
+
+    Returns:
+        np.ndarray: value(s) of random variable(s) at next time (current time incremented by `dt`).
+    """
     if type(s_t) != np.ndarray:
         s_t = np.array([s_t])
     dw = np.random.normal(0, np.sqrt(dt), len(s_t))
@@ -34,9 +60,24 @@ def orn_uhl(
         sigma: float,
         mu: float = 0,
 ) -> np.ndarray:
-    # In this model, the underlying asset's price is assumed to follow the SDE:
-    #                           dS = theta * (mu - S_t) * dt + sigma * dW_t
-    #                               (with W_t a Wiener process)
+    """
+    Compute `s_t` at time step `t + dt` considering that it follows an Ornstein–Uhlenbeck process (a Mean-Reverting process)
+    characterized by the SDE:
+    $$dS = \\theta (\\mu - S_t) dt + \sigma dW_t$$
+
+    Where:
+    $$dW_t \sim \mathcal{N}(0, dt)$$
+
+    Args:
+        s_t (Union[float, np.ndarray]): random variable(s) value(s) at current time.
+        dt (float): time step increment.
+        mu (float): drift of the process.
+        sigma (float): volatility of the process.
+        theta (float): a positive parameter.
+
+    Returns:
+        np.ndarray: value(s) of random variable(s) at next time (current time incremented by `dt`).
+    """
     if type(s_t) != np.ndarray:
         s_t = np.array([s_t])
     dw = np.random.normal(0, np.sqrt(dt), len(s_t))
@@ -51,11 +92,30 @@ def merton_jd(
         sigma: float,
         p: float,
 ) -> np.ndarray:
-    # In this model, the underlying asset's price is assumed to follow the SDE:
-    #                           dS = mu * S_t * dt + sigma * S_t * dW_t + S_t * dJ_t
-    #                      (with W_t a Wiener process and J_t a Compound Poisson Process)
-    # According to N. Privault's "Stochastic Calculus for Jump Processes":
-    #   dJ_t = Z_Nt * dNt with Z_Nt ~ N(1) and for sufficiently small dt dNt ~ Bernoulli(p * dt)
+    """
+    Compute `s_t` at time step `t + dt` considering that it follows a Merton Jump Diffusion process
+    characterized by the SDE:
+    $$dS = \\mu S_t dt + \\sigma S_t dW_t + S_t dJ_t$$
+
+    Where:
+    $$dW_t \sim \mathcal{N}(0, dt)$$
+
+    and for sufficiently small `dt`
+    $$dJ_t = Z_{N_t}dN_t \quad \\text{with} \quad Z_{N_t} \sim \mathcal{N}(0, 1) \quad \\text{and} \quad dN_t \sim Bernoulli(p \\times dt)$$
+
+    For further details and theory about this process, see for example
+    [N. Privault's course on _Stochastic Calculus for Jump Processes_ at Nanyang University](https://personal.ntu.edu.sg/nprivault/MA5182/stochastic-calculus-jump-processes.pdf).
+
+    Args:
+        s_t (Union[float, np.ndarray]): random variable(s) value(s) at current time.
+        dt (float): time step increment.
+        mu (float): drift of the process.
+        sigma (float): volatility of the process.
+        p (float): positive parameter (Bernoulli law's probability intervening in process' SDE is `p * dt`).
+
+    Returns:
+        np.ndarray: value(s) of random variable(s) at next time (current time incremented by `dt`).
+    """
     if type(s_t) != np.ndarray:
         s_t = np.array([s_t])
     size = len(s_t)
@@ -73,9 +133,24 @@ def cir(
         sigma: float,
         mu: float = 0,
 ) -> np.ndarray:
-    # In this model, the underlying asset's price is assumed to follow the SDE:
-    #                           dS = theta * (mu - S_t) * dt + sigma * sqrt(S_t) * dW_t
-    #                               (with W_t a Wiener process)
+    """
+    Compute `s_t` at time step `t + dt` considering that it follows a Cox-Ingersoll-Ross process (a Mean-Reverting process)
+    characterized by the SDE:
+    $$dS = \\theta (\\mu - S_t) dt + \\sigma \sqrt{S_t} * dW_t$$
+
+    Where:
+    $$dW_t \sim \mathcal{N}(0, dt)$$
+
+    Args:
+        s_t (Union[float, np.ndarray]): random variable(s) value(s) at current time.
+        dt (float): time step increment.
+        mu (float): drift of the process.
+        sigma (float): volatility of the process.
+        theta (float): a positive parameter.
+
+    Returns:
+        np.ndarray: value(s) of random variable(s) at next time (current time incremented by `dt`).
+    """
     if type(s_t) != np.ndarray:
         s_t = np.array([s_t])
     dw = np.random.normal(0, np.sqrt(dt), len(s_t))
@@ -90,20 +165,39 @@ def heston(
         mu: float,
         kappa: float,
         theta: float,
-        ksi: float,
-) -> np.ndarray:
-    # In this model, the underlying asset's price is assumed to follow the SDE:
-    #                           dS = mu * S_t * dt + sqrt(nu_t) * S_t * dW_t^{S}
-    #                           dnu = kappa * (theta - nu_t) * dt + ksi * sqrt(nu_t) * dW_t^{nu}
-    #                               (with W_t a Wiener process)
-    # Cf. Wiki https://en.wikipedia.org/wiki/Heston_model
+        xi: float,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Compute `s_t` at time step `t + dt` considering that it follows a Heston model
+    characterized by the following SDEs:
+    $$dS = \\mu S_t dt + \sqrt{\\nu_t} S_t dW_t^{S}$$
+    $$d\\nu = \\kappa (\\theta - \\nu_t) dt + \\xi \sqrt{\\nu_t} dW_t^{\\nu}$$
+
+    With:
+    $$dW_t^{S} \sim \mathcal{N}(0, dt)$$
+    $$dW_t^{\\nu} \sim \mathcal{N}(0, dt)$$
+
+    For further details, see for example [the Heston model Wikipedia page](https://en.wikipedia.org/wiki/Heston_model).
+
+    Args:
+        s_t (Union[float, np.ndarray]): random variable(s) value(s) at current time (typically underlying price).
+        nu_t (Union[float, np.ndarray]): the instantaneous variance(s) of the previous random variable(s) at current time (typically volatility).
+        dt (float): time step increment.
+        mu (float): drift of the process.
+        kappa (float): the rate at which `nu_t` reverts to `theta`.
+        theta (float): the long variance, or long-run average variance of the price.
+        xi (float): the volatility of the volatility ("vol of vol").
+
+    Returns:
+        Tuple[np.ndarray, np.ndarray]: value(s) of random variable(s) and its(their) variance(s) at next time (current time incremented by `dt`).
+    """
     if type(s_t) != np.ndarray:
         s_t = np.array([s_t])
     if type(nu_t) != np.ndarray:
         nu_t = np.array([nu_t])
     assert len(s_t) == len(nu_t)
     dw_nu = np.random.normal(0, np.sqrt(dt), len(nu_t))
-    dnu = kappa * (theta - nu_t) * dt + ksi * np.sqrt(nu_t) * dw_nu
+    dnu = kappa * (theta - nu_t) * dt + xi * np.sqrt(nu_t) * dw_nu
     dw_s = np.random.normal(0, np.sqrt(dt), len(s_t))
     ds = mu * s_t * dt + np.sqrt(nu_t) * s_t * dw_s
     return s_t + ds, nu_t + dnu
@@ -116,10 +210,27 @@ def vg(
         sigma: float,
         nu: float,
 ) -> np.ndarray:
-    # In this model, the underlying asset's price is assumed to follow the SDE:
-    #                           dS = theta * dG + sigma * sqrt(dG) * Z
-    #                               ( with dG ~ Gamma(dt/nu, nu) and Z ~ Normal(0, 1) )
-    # see Wiki https://en.wikipedia.org/wiki/Variance_gamma_process (Simulation)
+    """
+    Compute `s_t` at time step `t + dt` considering that it follows a Variance-Gamma model
+    characterized by the SDE:
+    $$dS = \\theta dG + \\sigma sqrt{dG} Z$$
+
+    With:
+    $$dG \sim \Gamma(\\frac{dt}{\\nu}, \\nu)$$
+    $$Z \sim \mathcal{N}(0, 1)$$
+
+    For further details, see for example [the Variance-Gamma model Wikipedia page](https://en.wikipedia.org/wiki/Variance_gamma_process).
+
+    Args:
+        s_t (Union[float, np.ndarray]): random variable(s) value(s) at current time.
+        dt (float): time step increment.
+        theta (float): positive parameter.
+        sigma (float): positive parameter.
+        nu (float): positive parameter.
+
+    Returns:
+        np.ndarray: value(s) of random variable(s) at next time (current time incremented by `dt`).
+    """
     if type(s_t) != np.ndarray:
         s_t = np.array([s_t])
     dg = np.random.gamma(dt/nu, nu, len(s_t))
