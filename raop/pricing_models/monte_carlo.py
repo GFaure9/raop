@@ -49,7 +49,7 @@ class MonteCarlo(OptionPricingModel):
         self.n_t = n_t
 
         self.basis_functions = "laguerre"
-        self.number_of_functions = 20
+        self.number_of_functions = 20  # this could be changed -> investigations should be led to find what is optimal
         if basis_functions is not None:
             self.basis_functions = basis_functions
         if number_of_functions is not None:

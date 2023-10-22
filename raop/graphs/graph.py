@@ -50,7 +50,7 @@ class Graph:
             x, y = self.df.keys()
         x_data, y_data = self.df[x], self.df[y]
 
-        # plot the figure
+        # Plot the figure
         fig, ax = plt.subplots()
         plt.style.use("ggplot")
         ax.set_title(f"{y}=f({x})")
@@ -61,7 +61,7 @@ class Graph:
         ax.legend()
         plt.tight_layout()
 
-        # either save or show the plot
+        # Either save or show the plot
         if save_path is not None:
             plt.savefig(save_path)
             plt.close(fig)
@@ -92,13 +92,13 @@ class Graph:
             x, y, z = self.df.keys()
         x_data, y_data, z_data = self.df[x], self.df[y], self.df[z]
 
-        # define x, y, z grids
+        # Define x, y, z grids
         x_grid = np.linspace(min(x_data), max(x_data), 1000)
         y_grid = np.linspace(min(y_data), max(y_data), 1000)
         xx, yy = np.meshgrid(x_grid, y_grid)
         zz = griddata((x_data, y_data), z_data, (xx, yy), method="cubic")
 
-        # plot the figure
+        # Plot the figure
         fig = plt.figure()
         ax = fig.add_subplot(111, projection="3d")
         surface = ax.plot_surface(xx, yy, zz, cmap="viridis")
@@ -108,7 +108,7 @@ class Graph:
         ax.set_zlabel(z)
         ax.set_title(f"{z}=f({x}, {y})")
 
-        # either save or show the plot
+        # Either save or show the plot
         if save_path is not None:
             plt.savefig(save_path)
             plt.close(fig)

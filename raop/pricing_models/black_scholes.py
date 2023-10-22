@@ -30,7 +30,7 @@ class BlackScholes(OptionPricingModel):
     def __init__(self, option):
         super().__init__(option)
 
-        if self.option.name != "european":
+        if self.option.name != "european":  # for now this model is only adapted to price European options
             error_msg = f"This method is only adapted for European options: " \
                         f"option name must be 'european'."
             log.error(error_msg)
@@ -63,8 +63,9 @@ class BlackScholes(OptionPricingModel):
         s, k, r, sigma, dt = opt.s, opt.k, opt.r, opt.sigma, opt.time_to_maturity
         price = None
 
+        # option's price is estimated by analytical formulas
         if opt.option_type == "call":
-            n_d1 = norm.cdf(self._d1)
+            n_d1 = norm.cdf(self._d1)  # norm.cdf is the normal law's cumulative distribution function
             n_d2 = norm.cdf(self._d2)
             price = n_d1 * s - n_d2 * k * np.exp(-r * dt)
 
@@ -104,6 +105,7 @@ class BlackScholes(OptionPricingModel):
         """
         log.info(f"Started computing option's Greeks with {self.name} method...")
 
+        # all greeks are computed with analytical formulas
         greeks = {
             "delta": self._delta,
             "gamma": self._gamma,

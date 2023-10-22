@@ -23,7 +23,7 @@ def gbm(s_t: Union[float, np.ndarray], dt: float, mu: float, sigma: float) -> np
     """
     if type(s_t) != np.ndarray:
         s_t = np.array([s_t])
-    dw = np.random.normal(0, np.sqrt(dt), len(s_t))
+    dw = np.random.normal(0, np.sqrt(dt), len(s_t))  # w is a Wiener process
     ds = mu * s_t * dt + sigma * s_t * dw
     return s_t + ds
 
@@ -196,9 +196,9 @@ def heston(
     if type(nu_t) != np.ndarray:
         nu_t = np.array([nu_t])
     assert len(s_t) == len(nu_t)
-    dw_nu = np.random.normal(0, np.sqrt(dt), len(nu_t))
+    dw_nu = np.random.normal(0, np.sqrt(dt), len(nu_t))  # 1st Wiener process
     dnu = kappa * (theta - nu_t) * dt + xi * np.sqrt(nu_t) * dw_nu
-    dw_s = np.random.normal(0, np.sqrt(dt), len(s_t))
+    dw_s = np.random.normal(0, np.sqrt(dt), len(s_t))  # 2nd Wiener process
     ds = mu * s_t * dt + np.sqrt(nu_t) * s_t * dw_s
     return s_t + ds, nu_t + dnu
 

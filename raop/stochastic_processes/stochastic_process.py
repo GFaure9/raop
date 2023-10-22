@@ -96,18 +96,27 @@ class StochasticProcess:
         Returns:
             Tuple[Union[float, np.ndarray], np.ndarray]: random variables values at time `t` and a np.ndarray with all random variable values between 0 and t (included).
         """
-        p = self.model_params
+        p = self.model_params  # contains all parameters to define the update rule of the stochastic process
+
+        # Variables are initialized
         xt = self.x0
         nut = self.nu0
         x_0_to_t = [[xt]]
+
+        # Adapt variables types to array if more than 1 stochastic process is simulated
         if n_var > 1:
             xt = np.ones(n_var) * xt
             nut = np.ones(n_var) * nut
             x_0_to_t = [xt.tolist()]
+
+        # Time step increment and update rule
         dt = t / n_t
-        process_update_func = getattr(process_update, self.model_name)
+        process_update_func = getattr(process_update, self.model_name)  # function used compute variables at t + dt
+
+        # Variables are update at each time step
         for k in range(n_t):
             if self.model_name == "heston":
+                # in this case it is specific because we also have to update the variance that is stochastic
                 xt, nut = process_update_func(s_t=xt, nu_t=nut, dt=dt, **p._asdict())
             else:
                 xt = process_update_func(s_t=xt, dt=dt, **p._asdict())
@@ -127,11 +136,13 @@ class StochasticProcess:
             n_var (int): number of simulated stochastic processes.
             save_path (str): path where to save the plot. Default is None: in that case plot will be displayed. If not, it will be saved at the given file path.
         """
+        # First simulate the processes between 0 and t
         processes = self.compute_xt(t, n_t, n_var)[1].T
         dt = t/n_t
         time = np.arange(0, t + dt, dt)
 
-        plt.style.use("ggplot")
+        # Make the plot
+        plt.style.use("ggplot")  # fancy plot style
         fig, ax = plt.subplots()
         ax.set_title(f"{self.model_name} stochastic process(es) from t=0 to t={t}")
         ax.set_xlabel("Time")
@@ -142,7 +153,7 @@ class StochasticProcess:
         ax.legend()
         plt.tight_layout()
 
-        if save_path is not None:
+        if save_path is not None:  # save the plot to the given path
             plt.savefig(save_path)
             plt.close(fig)
         else:

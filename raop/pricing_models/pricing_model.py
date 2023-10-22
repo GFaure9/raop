@@ -2,6 +2,7 @@ from collections import namedtuple
 
 
 class OptionPricingModel:
+    # remark: it could be possible to make this an abstract class using abc package (might be better...)
     """
     Generic class for defining an option pricing model.
 
@@ -22,6 +23,8 @@ class OptionPricingModel:
         **compute_greeks**: return an estimation of the greeks of the option defined in `option`.
     """
     def __init__(self, option: dict, **kwargs):
+        # using namedtuple is a way to be able to access to dict keys' values as class attributes
+        # this is to facilitate its usage/readability later in the code
         Option = namedtuple("Option", [key for key in option.keys()])
         self.option = Option(*option.values())
 

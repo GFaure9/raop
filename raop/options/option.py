@@ -75,7 +75,7 @@ class Option:
         self.s = underlying_price
         self.k = strike_price
         self.r = risk_free_rate
-        self.time_to_maturity = time_to_maturity
+        self.time_to_maturity = time_to_maturity  # years
         log.warning("'time_to_maturity' must be provided in years.")
 
         self.sigma = volatility
