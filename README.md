@@ -9,7 +9,7 @@
 
 [//]: # ([![Python Versions]&#40;https://img.shields.io/pypi/pyversions/your-package-name.svg&#41;]&#40;https://pypi.org/project/your-package-name/&#41;)
 [//]: # ([![Coverage]&#40;https://img.shields.io/codecov/c/gh/your-username/your-package-name&#41;]&#40;https://codecov.io/gh/your-username/your-package-name&#41;)
-[![GitHub Stars](https://img.shields.io/github/stars/GFaure9/raop)](https://github.com/GFaure9/raop/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/GFaure9/raop)](https://img.shields.io/github/stars/GFaure9/raop)
 [![GitHub Forks](https://img.shields.io/github/forks/GFaure9/raop)](https://github.com/GFaure9/raop)
 [![Last Commit](https://img.shields.io/github/last-commit/GFaure9/raop)](https://github.com/GFaure9/raop)
 
