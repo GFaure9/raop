@@ -49,8 +49,8 @@ financial options while considering risk factors.
 
 * __Option Pricing__ and __Greeks Computation__ through multiple possible approaches
 (Black-Scholes model, Binomial tree, Monte-Carlo simulations). Available types of options are:
-  * European;
-  * American;
+  * European
+  * American
 
 
 Next options to be implemented will be: Asian, Barrier, Look-Back, Binary, Spread, Exchange, Chooser and Quanto.
@@ -61,13 +61,13 @@ on its parameters.
 
 
 * __Stochastic Processes Simulation__ with different possible processes. Available processes are currently:
-  * Geometric Brownian Motion;
-  * Arithmetic Brownian Motion;
-  * Merton Jump-Diffusion;
-  * Ornstein-Uhlenbeck process;
-  * Cox-Ingersoll-Ross process;
-  * Heston model;
-  * Variance-Gamma model.
+  * Geometric Brownian Motion
+  * Arithmetic Brownian Motion
+  * Merton Jump-Diffusion
+  * Ornstein-Uhlenbeck process
+  * Cox-Ingersoll-Ross process
+  * Heston model
+  * Variance-Gamma model
 
 
 * Incoming features: 
