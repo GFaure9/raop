@@ -81,7 +81,7 @@ To install the package, you can either use the quick method by using ``pip``, wr
 command in your terminal:
 
 ```bash
-pip install raop
+pip install -i https://test.pypi.org/simple/ raop
 ```
 
 Or you can clone the GitHub project and, in the root directory of the project (i.e. the one containing the
