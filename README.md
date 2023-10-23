@@ -9,9 +9,9 @@
 
 [//]: # ([![Python Versions]&#40;https://img.shields.io/pypi/pyversions/your-package-name.svg&#41;]&#40;https://pypi.org/project/your-package-name/&#41;)
 [//]: # ([![Coverage]&#40;https://img.shields.io/codecov/c/gh/your-username/your-package-name&#41;]&#40;https://codecov.io/gh/your-username/your-package-name&#41;)
-[![GitHub Stars](https://img.shields.io/github/stars/GFaure9/raop)](https://github.com/your-username/your-package-name)
-[![GitHub Forks](https://img.shields.io/github/forks/GFaure9/raop)](https://github.com/your-username/your-package-name)
-[![Last Commit](https://img.shields.io/github/last-commit/GFaure9/raop)](https://github.com/your-username/your-package-name)
+[![GitHub Stars](https://img.shields.io/github/stars/GFaure9/raop)](https://github.com/GFaure9/raop)
+[![GitHub Forks](https://img.shields.io/github/forks/GFaure9/raop)](https://github.com/GFaure9/raop)
+[![Last Commit](https://img.shields.io/github/last-commit/GFaure9/raop)](https://github.com/GFaure9/raop)
 
 
 [//]: # (<div class="warning" style="background-color: #FFE8B2; border-left: 6px solid #FFC857; padding: 10px; margin-bottom: 20px; font-size: 16px;">)
