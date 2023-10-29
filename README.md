@@ -77,8 +77,7 @@ on its parameters.
 
 ## ⬇️ Installation Instructions <a id="install"></a>
 
-To install the package, you can either use the quick method by using ``pip``, writing the following
-command in your terminal:
+To install the package, you can either use the quick method by using ``pip``:
 
 ```bash
 pip install -i https://test.pypi.org/simple/ raop
@@ -91,8 +90,8 @@ to install the package, run the following commands:
 ```bash
 git clone https://github.com/GFaure9/raop.git
 cd raop
-pip install --upgrade setuptools  # making sure that an up-to-date version of setuptools is installed
-pip install -e .
+python -m pip install --upgrade setuptools  # making sure that an up-to-date version of setuptools is installed
+python -m pip install -e .
 ```
 
 That's it! You can now start using the package 😊!
